@@ -1,22 +1,14 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function AnnouncementBar() {
-  // Marquee animation - continuous scrolling from right to left
-  const marqueeVariants = {
-    animate: {
-      x: [0, -1000],
-      transition: {
-        x: {
-          repeat: Infinity,
-          repeatType: 'loop',
-          duration: 20,
-          ease: 'linear',
-        },
-      },
-    },
-  };
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -29,6 +21,13 @@ export default function AnnouncementBar() {
       },
     },
   };
+
+  // Premium ticker tape content
+  const tickerItems = [
+    { icon: '🔥', text: 'Join Our Free Basic Class about Trading' },
+    { icon: '📅', text: 'Free 5 Days Live Training' },
+    { icon: '🎥', text: 'Conducted via Zoom / Google Meet' },
+  ];
 
   return (
     <motion.div
@@ -50,89 +49,62 @@ export default function AnnouncementBar() {
         <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-white/20" />
       </div>
 
-      {/* Content Container */}
-      <div className="relative h-full flex items-center">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 md:gap-6">
-          {/* LEFT: Animated Marquee Text */}
-          <div className="flex-1 min-w-0 overflow-hidden">
-            <motion.div
-              variants={marqueeVariants}
-              animate="animate"
-              className="flex whitespace-nowrap gap-12"
-            >
-              {/* First set of scrolling text */}
-              <div className="flex items-center gap-2 px-2">
-                <motion.span
-                  animate={{ rotate: [0, 15, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="text-xl flex-shrink-0"
-                >
-                  🔥
-                </motion.span>
-                <span className="font-bold text-sm text-text drop-shadow-sm">
-                  Join Our Free Basic Class about Trading
-                </span>
-              </div>
+      {/* PREMIUM TICKER MARQUEE - Continuous Scrolling */}
+      <div className="relative h-full flex items-center overflow-hidden">
+        {/* Gradient fade effect - Left */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-blue-50 to-transparent z-20 pointer-events-none" />
+        
+        {/* Gradient fade effect - Right */}
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-blue-50 to-transparent z-20 pointer-events-none" />
 
-              {/* Duplicate for seamless infinite loop */}
-              <div className="flex items-center gap-2 px-2">
-                <motion.span
-                  animate={{ rotate: [0, 15, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="text-xl flex-shrink-0"
+        {/* Continuous Scrolling Marquee */}
+        <motion.div
+          className="flex items-center gap-12 whitespace-nowrap py-3"
+          animate={{ x: [0, -2000] }}
+          transition={{
+            x: {
+              duration: 30,
+              repeat: Infinity,
+              repeatType: 'loop',
+              ease: 'linear',
+            },
+          }}
+        >
+          {/* Multiple sets of ticker items for seamless loop */}
+          {[...Array(4)].map((_, setIndex) => (
+            <div key={setIndex} className="flex items-center gap-12">
+              {tickerItems.map((item, idx) => (
+                <div
+                  key={`${setIndex}-${idx}`}
+                  className="flex items-center gap-2 px-6 flex-shrink-0 group"
                 >
-                  🔥
-                </motion.span>
-                <span className="font-bold text-sm text-text drop-shadow-sm">
-                  Join Our Free Basic Class about Trading
-                </span>
-              </div>
-            </motion.div>
-          </div>
+                  {/* Animated Icon */}
+                  <motion.span
+                    animate={{ rotate: [0, 10, -5, 0] }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatType: 'reverse',
+                    }}
+                    className="text-lg md:text-xl flex-shrink-0"
+                  >
+                    {item.icon}
+                  </motion.span>
 
-          {/* CENTER: Training Info (Desktop/XL only) */}
-          <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 bg-white/40 rounded-full backdrop-blur border border-white/50 shadow-sm flex-shrink-0">
-            <motion.span
-              animate={{ y: [0, -4, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="text-lg"
-            >
-              📅
-            </motion.span>
-            <div className="flex flex-col gap-0">
-              <span className="text-xs font-bold text-text leading-tight">Free 5 Days Live Training</span>
-              <span className="text-xs text-subtext leading-tight">🎥 Zoom / Google Meet</span>
+                  {/* Ticker Text */}
+                  <span className="font-bold text-xs md:text-sm text-text drop-shadow-sm group-hover:text-primary transition-colors duration-300">
+                    {item.text}
+                  </span>
+
+                  {/* Divider */}
+                  {idx < tickerItems.length - 1 && (
+                    <div className="w-1 h-4 bg-gradient-to-b from-primary/30 to-transparent rounded-full ml-6 flex-shrink-0" />
+                  )}
+                </div>
+              ))}
             </div>
-          </div>
-
-          {/* RIGHT: CTA Button */}
-          <div className="flex-shrink-0">
-            <Link to="/register">
-              <motion.button
-                whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(37, 99, 235, 0.3)' }}
-                whileTap={{ scale: 0.95 }}
-                className="relative px-5 md:px-7 py-2 rounded-xl font-bold text-xs md:text-sm text-white overflow-hidden group
-                  bg-gradient-to-r from-primary to-accent hover:from-blue-700 hover:to-cyan-600
-                  shadow-lg hover:shadow-2xl transition-all duration-300
-                  border border-primary/50 hover:border-primary/70
-                  flex items-center gap-1.5 whitespace-nowrap"
-              >
-                {/* Glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                {/* Button content */}
-                <span className="relative">Register Free Now</span>
-                <motion.span
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="relative"
-                >
-                  <ArrowRight size={16} />
-                </motion.span>
-              </motion.button>
-            </Link>
-          </div>
-        </div>
+          ))}
+        </motion.div>
       </div>
 
       {/* Bottom glow line */}
@@ -142,6 +114,34 @@ export default function AnnouncementBar() {
           boxShadow: '0 0 15px rgba(37, 99, 235, 0.4)',
         }}
       />
+
+      {/* CTA Button - Fixed on right side (optional floating button) */}
+      <div className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-30">
+        <Link to="/register">
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(37, 99, 235, 0.3)' }}
+            whileTap={{ scale: 0.95 }}
+            className="relative px-5 md:px-6 py-2 rounded-xl font-bold text-xs md:text-sm text-white overflow-hidden group
+              bg-gradient-to-r from-primary to-accent hover:from-blue-700 hover:to-cyan-600
+              shadow-lg hover:shadow-2xl transition-all duration-300
+              border border-primary/50 hover:border-primary/70
+              flex items-center gap-1.5 whitespace-nowrap"
+          >
+            {/* Glow effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+            {/* Button content */}
+            <span className="relative">Register</span>
+            <motion.span
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="relative hidden md:inline"
+            >
+              <ArrowRight size={16} />
+            </motion.span>
+          </motion.button>
+        </Link>
+      </div>
     </motion.div>
   );
 }
