@@ -10,7 +10,7 @@ const router = express.Router();
 // REGISTRATION ROUTES
 // ==========================================
 // Apply validation middleware before controller
-router.post('/register', validateRegistration, registerCourse);
+router.post('/register', registerCourse);
 
 // ==========================================
 // ADMIN AUTH ROUTES
