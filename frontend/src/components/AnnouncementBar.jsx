@@ -1,224 +1,167 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import clsx from 'clsx';
 
 export default function AnnouncementBar() {
+  // Marquee animation - scrolling text from right to left
+  const marqueeVariants = {
+    animate: {
+      x: [0, -1000],
+      transition: {
+        x: {
+          repeat: Infinity,
+          repeatType: 'loop',
+          duration: 20,
+          ease: 'linear',
+        },
+      },
+    },
+  };
+
   const containerVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.8,
         ease: 'easeOut',
       },
     },
   };
 
-  const textVariants = {
-    hidden: { opacity: 0 },
-    visible: (custom) => ({
-      opacity: 1,
-      transition: {
-        delay: custom * 0.15,
-        duration: 0.5,
-      },
-    }),
-  };
-
-  const pulseVariants = {
-    initial: { scale: 1 },
-    animate: {
-      scale: 1.05,
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        repeatType: 'reverse',
-      },
-    },
-  };
-
-  const buttonHover = {
-    scale: 1.05,
-    boxShadow: '0 10px 25px rgba(59, 130, 246, 0.4)',
-  };
-
   return (
-    <>
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className={clsx(
-          'relative w-full overflow-hidden',
-          'bg-gradient-to-r from-blue-50 via-blue-50 to-white',
-          'dark:from-slate-900 dark:via-slate-900 dark:to-slate-800'
-        )}
-      >
-        {/* Trading Pattern Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Gradient overlay with trading theme */}
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{
-              backgroundImage: `
-                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.05) 50%, transparent 70%)
-              `,
-            }}
-          />
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="relative w-full overflow-hidden bg-gradient-to-r from-blue-50 via-blue-50/90 to-blue-50 border-b border-blue-100/50"
+    >
+      {/* Animated Background Effects */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Backdrop blur effect */}
+        <div className="absolute inset-0 backdrop-blur-sm" />
 
-          {/* Animated chart line pattern */}
-          <svg
-            className="absolute w-full h-full opacity-5"
-            preserveAspectRatio="none"
-            viewBox="0 0 1200 100"
-          >
-            <polyline
-              points="0,50 100,30 200,60 300,40 400,55 500,35 600,50 700,45 800,60 900,40 1000,55 1100,50 1200,45"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="text-blue-400"
-            />
-          </svg>
+        {/* Glowing animated circles - like homepage hero */}
+        <div className="absolute top-1/2 -left-48 w-96 h-96 bg-primary/15 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute top-1/2 -right-48 w-96 h-96 bg-accent/15 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
 
-          {/* Candlestick glow effect */}
-          <div
-            className="absolute top-1/2 left-1/4 w-64 h-40 rounded-full blur-3xl opacity-20 pointer-events-none"
-            style={{
-              background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-            }}
-          />
-        </div>
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-white/20" />
+      </div>
 
-        {/* Content Container */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-5">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
-            {/* Left Section - Main Announcement */}
+      {/* Content Container */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 md:py-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
+          {/* Left Section - Animated Marquee */}
+          <div className="flex-1 min-w-0 overflow-hidden">
             <motion.div
-              custom={0}
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex items-center gap-3 flex-shrink-0"
+              variants={marqueeVariants}
+              animate="animate"
+              className="flex whitespace-nowrap gap-12"
             >
-              <motion.span
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="text-2xl md:text-3xl"
-              >
-                🔥
-              </motion.span>
-              <div className="flex flex-col">
-                <p className="text-sm md:text-base font-bold text-gray-900 dark:text-white leading-tight">
-                  Join Our Free Basic Class
-                </p>
-                <p className="text-xs md:text-sm text-gray-700 dark:text-gray-300 font-medium">
-                  about Trading Fundamentals
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Middle Section - Responsive Divider & Training Info */}
-            <motion.div
-              custom={1}
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              className="hidden md:flex items-center gap-4 flex-shrink-0"
-            >
-              <div className="h-8 w-1 bg-gradient-to-b from-blue-300 to-purple-300 rounded-full opacity-50" />
-              <div className="flex items-center gap-2">
+              {/* First set */}
+              <div className="flex items-center gap-2 px-4">
                 <motion.span
-                  animate={{ y: [0, -3, 0] }}
+                  animate={{ rotate: [0, 15, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="text-xl"
+                  className="text-xl md:text-2xl flex-shrink-0"
                 >
-                  📅
+                  🔥
                 </motion.span>
-                <div className="flex flex-col">
-                  <p className="text-sm font-bold text-gray-900 dark:text-white">
-                    Free 5 Days Live Training
-                  </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">
-                    🎥 Zoom / Google Meet
-                  </p>
-                </div>
+                <span className="font-bold text-sm md:text-base text-text drop-shadow-sm">
+                  Join Our Free Basic Class about Trading
+                </span>
+              </div>
+
+              {/* Duplicate for seamless loop */}
+              <div className="flex items-center gap-2 px-4">
+                <motion.span
+                  animate={{ rotate: [0, 15, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="text-xl md:text-2xl flex-shrink-0"
+                >
+                  🔥
+                </motion.span>
+                <span className="font-bold text-sm md:text-base text-text drop-shadow-sm">
+                  Join Our Free Basic Class about Trading
+                </span>
               </div>
             </motion.div>
+          </div>
 
-            {/* Mobile Training Info */}
-            <motion.div
-              custom={1}
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              className="md:hidden flex flex-col items-center gap-2 text-center"
+          {/* Center Section - Training Info (Hidden on mobile) */}
+          <div className="hidden lg:flex items-center gap-3 flex-shrink-0 px-4 py-2 bg-white/40 rounded-full backdrop-blur border border-white/50 shadow-sm">
+            <motion.span
+              animate={{ y: [0, -4, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-lg"
             >
-              <p className="text-sm font-bold text-gray-900 dark:text-white">
-                📅 Free 5 Days Live Training
-              </p>
-              <p className="text-xs text-gray-600 dark:text-gray-400">
-                🎥 Zoom / Google Meet
-              </p>
-            </motion.div>
+              📅
+            </motion.span>
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs font-bold text-text">Free 5 Days Live Training</span>
+              <span className="text-xs text-subtext">🎥 Zoom / Google Meet</span>
+            </div>
+          </div>
 
-            {/* Right Section - CTA Button */}
-            <motion.div
-              custom={2}
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex-shrink-0"
-            >
-              <Link to="/register">
-                <motion.button
-                  whileHover={buttonHover}
-                  whileTap={{ scale: 0.95 }}
-                  className={clsx(
-                    'relative px-6 md:px-8 py-2.5 md:py-3 rounded-lg font-semibold',
-                    'text-white text-sm md:text-base',
-                    'bg-gradient-to-r from-blue-600 to-purple-600',
-                    'hover:from-blue-700 hover:to-purple-700',
-                    'shadow-lg hover:shadow-xl',
-                    'flex items-center gap-2',
-                    'transition-all duration-300',
-                    'border border-blue-500/50 hover:border-blue-400',
-                    'overflow-hidden group'
-                  )}
+          {/* Right Section - CTA Button */}
+          <div className="flex-shrink-0">
+            <Link to="/register">
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(37, 99, 235, 0.3)' }}
+                whileTap={{ scale: 0.95 }}
+                className="relative px-6 md:px-8 py-2.5 md:py-3 rounded-xl font-bold text-sm md:text-base text-white overflow-hidden group
+                  bg-gradient-to-r from-primary to-accent hover:from-blue-700 hover:to-cyan-600
+                  shadow-lg hover:shadow-2xl transition-all duration-300
+                  border border-primary/50 hover:border-primary/70
+                  flex items-center gap-2 whitespace-nowrap"
+              >
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Button content */}
+                <span className="relative">Register Free Now</span>
+                <motion.span
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="relative"
                 >
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 group-hover:animate-pulse" />
-
-                  {/* Button content */}
-                  <span className="relative font-bold">Register Free Now</span>
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="relative"
-                  >
-                    <ArrowRight size={18} />
-                  </motion.span>
-                </motion.button>
-              </Link>
-            </motion.div>
+                  <ArrowRight size={18} />
+                </motion.span>
+              </motion.button>
+            </Link>
           </div>
         </div>
 
-        {/* Bottom Glow Effect */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30"
-          style={{
-            boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)',
-          }}
-        />
-      </motion.div>
+        {/* Mobile Training Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="lg:hidden flex items-center justify-center gap-2 mt-4 px-4 py-2 bg-white/40 rounded-lg backdrop-blur border border-white/50 mx-auto w-fit shadow-sm"
+        >
+          <motion.span
+            animate={{ y: [0, -4, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-lg"
+          >
+            📅
+          </motion.span>
+          <div className="flex flex-col gap-0.5">
+            <span className="text-xs font-bold text-text">Free 5 Days Live Training</span>
+            <span className="text-xs text-subtext">🎥 Zoom / Google Meet</span>
+          </div>
+        </motion.div>
+      </div>
 
-      {/* Divider line */}
-      <div className="h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent" />
-    </>
+      {/* Bottom glow line */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+        style={{
+          boxShadow: '0 0 15px rgba(37, 99, 235, 0.4)',
+        }}
+      />
+    </motion.div>
   );
 }
