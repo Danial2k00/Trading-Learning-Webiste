@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 export default function AnnouncementBar() {
-  // Marquee animation - scrolling text from right to left
+  // Marquee animation - continuous scrolling from right to left
   const marqueeVariants = {
     animate: {
       x: [0, -1000],
@@ -35,14 +35,14 @@ export default function AnnouncementBar() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="relative w-full overflow-hidden bg-gradient-to-r from-blue-50 via-blue-50/90 to-blue-50 border-b border-blue-100/50"
+      className="fixed top-0 left-0 right-0 h-[60px] w-full z-40 overflow-hidden bg-gradient-to-r from-blue-50 via-blue-50/90 to-blue-50 border-b border-blue-100/50"
     >
-      {/* Animated Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Backdrop blur effect */}
+      {/* Background Effects - Premium Trading Theme */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Backdrop blur */}
         <div className="absolute inset-0 backdrop-blur-sm" />
 
-        {/* Glowing animated circles - like homepage hero */}
+        {/* Animated glowing circles (like homepage hero) */}
         <div className="absolute top-1/2 -left-48 w-96 h-96 bg-primary/15 rounded-full blur-[120px] animate-pulse" />
         <div className="absolute top-1/2 -right-48 w-96 h-96 bg-accent/15 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
 
@@ -51,47 +51,47 @@ export default function AnnouncementBar() {
       </div>
 
       {/* Content Container */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 md:py-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
-          {/* Left Section - Animated Marquee */}
+      <div className="relative h-full flex items-center">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 md:gap-6">
+          {/* LEFT: Animated Marquee Text */}
           <div className="flex-1 min-w-0 overflow-hidden">
             <motion.div
               variants={marqueeVariants}
               animate="animate"
               className="flex whitespace-nowrap gap-12"
             >
-              {/* First set */}
-              <div className="flex items-center gap-2 px-4">
+              {/* First set of scrolling text */}
+              <div className="flex items-center gap-2 px-2">
                 <motion.span
                   animate={{ rotate: [0, 15, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="text-xl md:text-2xl flex-shrink-0"
+                  className="text-xl flex-shrink-0"
                 >
                   🔥
                 </motion.span>
-                <span className="font-bold text-sm md:text-base text-text drop-shadow-sm">
+                <span className="font-bold text-sm text-text drop-shadow-sm">
                   Join Our Free Basic Class about Trading
                 </span>
               </div>
 
-              {/* Duplicate for seamless loop */}
-              <div className="flex items-center gap-2 px-4">
+              {/* Duplicate for seamless infinite loop */}
+              <div className="flex items-center gap-2 px-2">
                 <motion.span
                   animate={{ rotate: [0, 15, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="text-xl md:text-2xl flex-shrink-0"
+                  className="text-xl flex-shrink-0"
                 >
                   🔥
                 </motion.span>
-                <span className="font-bold text-sm md:text-base text-text drop-shadow-sm">
+                <span className="font-bold text-sm text-text drop-shadow-sm">
                   Join Our Free Basic Class about Trading
                 </span>
               </div>
             </motion.div>
           </div>
 
-          {/* Center Section - Training Info (Hidden on mobile) */}
-          <div className="hidden lg:flex items-center gap-3 flex-shrink-0 px-4 py-2 bg-white/40 rounded-full backdrop-blur border border-white/50 shadow-sm">
+          {/* CENTER: Training Info (Desktop/XL only) */}
+          <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 bg-white/40 rounded-full backdrop-blur border border-white/50 shadow-sm flex-shrink-0">
             <motion.span
               animate={{ y: [0, -4, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
@@ -99,23 +99,23 @@ export default function AnnouncementBar() {
             >
               📅
             </motion.span>
-            <div className="flex flex-col gap-0.5">
-              <span className="text-xs font-bold text-text">Free 5 Days Live Training</span>
-              <span className="text-xs text-subtext">🎥 Zoom / Google Meet</span>
+            <div className="flex flex-col gap-0">
+              <span className="text-xs font-bold text-text leading-tight">Free 5 Days Live Training</span>
+              <span className="text-xs text-subtext leading-tight">🎥 Zoom / Google Meet</span>
             </div>
           </div>
 
-          {/* Right Section - CTA Button */}
+          {/* RIGHT: CTA Button */}
           <div className="flex-shrink-0">
             <Link to="/register">
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(37, 99, 235, 0.3)' }}
                 whileTap={{ scale: 0.95 }}
-                className="relative px-6 md:px-8 py-2.5 md:py-3 rounded-xl font-bold text-sm md:text-base text-white overflow-hidden group
+                className="relative px-5 md:px-7 py-2 rounded-xl font-bold text-xs md:text-sm text-white overflow-hidden group
                   bg-gradient-to-r from-primary to-accent hover:from-blue-700 hover:to-cyan-600
                   shadow-lg hover:shadow-2xl transition-all duration-300
                   border border-primary/50 hover:border-primary/70
-                  flex items-center gap-2 whitespace-nowrap"
+                  flex items-center gap-1.5 whitespace-nowrap"
               >
                 {/* Glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -127,37 +127,17 @@ export default function AnnouncementBar() {
                   transition={{ duration: 1.5, repeat: Infinity }}
                   className="relative"
                 >
-                  <ArrowRight size={18} />
+                  <ArrowRight size={16} />
                 </motion.span>
               </motion.button>
             </Link>
           </div>
         </div>
-
-        {/* Mobile Training Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="lg:hidden flex items-center justify-center gap-2 mt-4 px-4 py-2 bg-white/40 rounded-lg backdrop-blur border border-white/50 mx-auto w-fit shadow-sm"
-        >
-          <motion.span
-            animate={{ y: [0, -4, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-lg"
-          >
-            📅
-          </motion.span>
-          <div className="flex flex-col gap-0.5">
-            <span className="text-xs font-bold text-text">Free 5 Days Live Training</span>
-            <span className="text-xs text-subtext">🎥 Zoom / Google Meet</span>
-          </div>
-        </motion.div>
       </div>
 
       {/* Bottom glow line */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent pointer-events-none"
         style={{
           boxShadow: '0 0 15px rgba(37, 99, 235, 0.4)',
         }}

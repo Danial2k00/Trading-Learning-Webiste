@@ -13,7 +13,7 @@ const navLinks = [
   { name: 'Contact Us', path: '/contact' },
 ];
 
-export default function Navbar() {
+export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -27,17 +27,19 @@ export default function Navbar() {
   }, []);
 
   return (
-    <motion.nav
+    <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={clsx(
-        'fixed top-[60px] left-0 right-0 z-50 transition-all duration-300 w-full',
+        'fixed left-0 right-0 z-50 transition-all duration-300 w-full',
+        'top-[60px]',
         scrolled ? 'glass py-3' : 'bg-transparent py-5'
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center group-hover:rotate-12 transition-transform shadow-md">
               <TrendingUp className="text-white w-6 h-6" />
@@ -47,7 +49,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Nav */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
@@ -79,15 +81,15 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-subtext hover:text-primary"
+              className="text-subtext hover:text-primary transition-colors"
             >
-              {mobileMenuOpen ? <X /> : <Menu />}
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile Navigation Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -120,6 +122,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </motion.header>
   );
 }

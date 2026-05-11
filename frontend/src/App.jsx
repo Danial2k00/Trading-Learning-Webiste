@@ -3,7 +3,7 @@ import { Toaster } from 'react-hot-toast';
 
 // Public Components
 import AnnouncementBar from './components/AnnouncementBar';
-import Navbar from './components/Navbar';
+import Header from './components/Header';
 import Footer from './components/Footer';
 
 // Public Pages
@@ -25,11 +25,17 @@ import AdminSectionPlaceholder from './pages/admin/AdminSectionPlaceholder';
 const PublicLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
+      {/* SECTION 1: Announcement Bar - Top of page */}
       <AnnouncementBar />
-      <Navbar />
-      <main className="flex-grow pt-20">
+      
+      {/* SECTION 2: Header/Navbar - Below announcement */}
+      <Header />
+      
+      {/* SECTION 3: Main Content - Below both header sections */}
+      <main className="flex-grow pt-[120px]">
         <Outlet />
       </main>
+      
       <Footer />
     </div>
   );
