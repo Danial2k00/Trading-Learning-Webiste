@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom
 import { Toaster } from 'react-hot-toast';
 
 // Public Components
+import AnnouncementBar from './components/AnnouncementBar';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -24,6 +25,7 @@ import AdminSectionPlaceholder from './pages/admin/AdminSectionPlaceholder';
 const PublicLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
+      <AnnouncementBar />
       <Navbar />
       <main className="flex-grow pt-20">
         <Outlet />
