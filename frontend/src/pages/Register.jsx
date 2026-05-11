@@ -28,9 +28,9 @@ export default function Register() {
     setIsSubmitting(true);
     try {
       // Use the environment variable if available, else fallback to localhost for development
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-      
-      const res = await axios.post(`${API_URL}/register`, data);
+      const API_URL = import.meta.env.VITE_API_URL;
+
+      const res = await axios.post(`${API_URL}/api/register`, data);
       if (res.status === 201) {
         toast.success('Registration successful! Our team will contact you shortly.');
         setTimeout(() => navigate('/'), 2000);
