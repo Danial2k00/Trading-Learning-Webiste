@@ -6,7 +6,7 @@ const testimonials = [
     name: "Rahul Verma",
     role: "Full-time Trader",
     image: "https://i.pravatar.cc/150?img=11",
-    text: "Before joining TradePro, I blew my account twice. The advanced price action concepts taught here completely changed my perspective. I've been consistently profitable for 6 months now.",
+    text: "Before joining Assets Legacy FX Academy, I blew my account twice. The advanced price action concepts taught here completely changed my perspective. I've been consistently profitable for 6 months now.",
     rating: 5
   },
   {

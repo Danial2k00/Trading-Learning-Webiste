@@ -44,8 +44,11 @@ export default function Header() {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center group-hover:rotate-12 transition-transform shadow-md">
               <TrendingUp className="text-white w-6 h-6" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-text">
-              Trade<span className="text-primary">Pro</span>
+            <span className="text-lg font-bold tracking-tight text-text hidden sm:inline">
+              Assets Legacy <span className="text-primary">FX Academy</span>
+            </span>
+            <span className="text-lg font-bold tracking-tight text-text sm:hidden">
+              ALXA
             </span>
           </Link>
 

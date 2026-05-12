@@ -23,10 +23,10 @@ export default function AboutUs() {
 
           <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
             <h1 className="text-4xl md:text-5xl font-bold text-text mb-6">
-              Meet The <span className="text-primary">Mentor</span>
+              Meet The <span className="text-primary">Founder</span>
             </h1>
             <p className="text-subtext text-lg leading-relaxed mb-6">
-              Hi, I'm the founder of TradePro. I started my trading journey with a blown account and no direction. It took me years of trial and error to decode how institutions actually move the market.
+              Hi, I'm the founder of Assets Legacy FX Academy. I started my trading journey with a blown account and no direction. It took me years of trial and error to decode how institutions actually move the market.
             </p>
             <p className="text-subtext text-lg leading-relaxed mb-8">
               My goal is to cut down your learning curve. I teach exactly what I trade. No indicator setups, no complex algorithms. Just pure price action, volume analysis, and solid risk management.
@@ -96,7 +96,7 @@ export default function AboutUs() {
             <div className="relative">
               <div className="absolute -left-[35px] w-4 h-4 rounded-full bg-primary mt-1.5" />
               <h3 className="text-xl font-bold text-text">2023</h3>
-              <p className="text-subtext">Officially launched TradePro. Crossed 5,000+ active students.</p>
+              <p className="text-subtext">Officially launched Assets Legacy FX Academy. Crossed 5,000+ active students.</p>
             </div>
             <div className="relative">
               <div className="absolute -left-[35px] w-4 h-4 rounded-full bg-primary shadow-[0_0_10px_#2563EB] mt-1.5 ring-4 ring-primary/20" />
