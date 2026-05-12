@@ -34,7 +34,7 @@ export default function ContactUs() {
   return (
     <div className="w-full pt-10 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
@@ -49,7 +49,6 @@ export default function ContactUs() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {contactCards.map((card, index) => {
             const Icon = card.icon;
-            const isLink = card.link;
             const content = (
               <motion.div
                 key={index}
@@ -57,14 +56,14 @@ export default function ContactUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className={`relative h-full rounded-2xl p-8 border border-white/20 backdrop-blur-xl shadow-[0_8px_32px_rgba(31,41,55,0.1)] hover:shadow-[0_8px_32px_rgba(37,99,235,0.2)] transition-all duration-300 group overflow-hidden cursor-pointer`}
+                className={`relative h-full rounded-2xl p-8 border border-white/20 backdrop-blur-xl shadow-[0_8px_32px_rgba(31,41,55,0.1)] hover:shadow-[0_8px_32px_rgba(37,99,235,0.2)] transition-all duration-300 group overflow-hidden`}
               >
                 {/* Gradient Background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-50 group-hover:opacity-75 transition-opacity duration-300`} />
-                
+
                 {/* Animated Border Gradient */}
                 <div className="absolute inset-0 border border-transparent rounded-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
+
                 {/* Content */}
                 <div className="relative z-10">
                   <div className="w-14 h-14 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 border border-white/20 group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300 shadow-lg">
@@ -78,7 +77,7 @@ export default function ContactUs() {
               </motion.div>
             );
 
-            return isLink ? (
+            return card.link ? (
               <a href={card.link} key={index}>
                 {content}
               </a>
@@ -92,7 +91,7 @@ export default function ContactUs() {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Left Side: Google Map & WhatsApp */}
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="space-y-8">
-            
+
             {/* Google Map */}
             <div className="rounded-3xl overflow-hidden border border-black/5 shadow-lg h-[400px]">
               <iframe
@@ -103,11 +102,11 @@ export default function ContactUs() {
                 allowFullScreen=""
                 referrerPolicy="no-referrer-when-downgrade"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.2357892234635!2d55.30779!3d25.246395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6b8d8d8d8d8d%3A0x3e5f6b8d8d8d8d8d!2sCenturion%20Star%20Tower%2C%20Deira%2C%20Dubai!5e0!3m2!1sen!2sae!4v1234567890"
-              ></iframe>
+              />
             </div>
 
             {/* WhatsApp CTA */}
-            <motion.div 
+            <motion.div
               whileHover={{ y: -5 }}
               className="bg-gradient-to-br from-[#25D366]/20 via-[#128C7E]/20 to-[#075E54]/20 border border-[#25D366]/30 p-8 rounded-3xl shadow-lg backdrop-blur-xl"
             >
@@ -116,9 +115,9 @@ export default function ContactUs() {
                 Fastest Response
               </h3>
               <p className="text-subtext mb-6">Message us directly on WhatsApp for immediate assistance regarding courses and trading education.</p>
-              <a 
-                href="https://wa.me/971562976323" 
-                target="_blank" 
+              <a
+                href="https://wa.me/971562976323"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] text-white font-bold hover:bg-[#20bd5a] transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
               >
@@ -131,21 +130,21 @@ export default function ContactUs() {
           <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
             <form className="bg-gradient-to-br from-card to-white border border-black/5 p-8 rounded-3xl space-y-6 shadow-lg backdrop-blur-xl">
               <h2 className="text-2xl font-bold text-text mb-8">Send us a Message</h2>
-              
+
               <div className="space-y-4">
                 <div className="group">
                   <label className="block text-sm font-semibold text-text mb-2">Full Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     className="w-full bg-secondary/50 border border-black/5 rounded-xl px-4 py-3.5 text-text placeholder-subtext/50 focus:outline-none focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner group-hover:border-black/10"
                     placeholder="John Doe"
                   />
                 </div>
-                
+
                 <div className="group">
                   <label className="block text-sm font-semibold text-text mb-2">Email Address</label>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     className="w-full bg-secondary/50 border border-black/5 rounded-xl px-4 py-3.5 text-text placeholder-subtext/50 focus:outline-none focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner group-hover:border-black/10"
                     placeholder="john@example.com"
                   />
@@ -153,8 +152,8 @@ export default function ContactUs() {
 
                 <div className="group">
                   <label className="block text-sm font-semibold text-text mb-2">Phone Number</label>
-                  <input 
-                    type="tel" 
+                  <input
+                    type="tel"
                     className="w-full bg-secondary/50 border border-black/5 rounded-xl px-4 py-3.5 text-text placeholder-subtext/50 focus:outline-none focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner group-hover:border-black/10"
                     placeholder="+971 50 XXX XXXX"
                   />
@@ -162,8 +161,8 @@ export default function ContactUs() {
 
                 <div className="group">
                   <label className="block text-sm font-semibold text-text mb-2">Subject</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     className="w-full bg-secondary/50 border border-black/5 rounded-xl px-4 py-3.5 text-text placeholder-subtext/50 focus:outline-none focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner group-hover:border-black/10"
                     placeholder="What is this about?"
                   />
@@ -171,7 +170,7 @@ export default function ContactUs() {
 
                 <div className="group">
                   <label className="block text-sm font-semibold text-text mb-2">Message</label>
-                  <textarea 
+                  <textarea
                     rows={4}
                     className="w-full bg-secondary/50 border border-black/5 rounded-xl px-4 py-3.5 text-text placeholder-subtext/50 focus:outline-none focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner resize-none group-hover:border-black/10"
                     placeholder="Tell us more about your inquiry..."
@@ -179,7 +178,7 @@ export default function ContactUs() {
                 </div>
               </div>
 
-              <motion.button 
+              <motion.button
                 type="button"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -219,14 +218,6 @@ export default function ContactUs() {
             </div>
           </div>
         </motion.div>
-      </div>
-    </div>
-  );
-}
-              </button>
-            </form>
-          </motion.div>
-        </div>
       </div>
     </div>
   );
