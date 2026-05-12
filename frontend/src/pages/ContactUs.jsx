@@ -36,14 +36,18 @@ export default function ContactUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-4xl md:text-6xl font-bold text-text mb-6">Get in <span className="text-primary">Touch</span></h1>
-            <p className="text-lg text-subtext">
-              Have questions about our courses or need support? We're here to help you on your trading journey.
-            </p>
-          </motion.div>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center max-w-3xl mx-auto mb-20"
+        >
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6">
+            Get in <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Touch</span>
+          </h1>
+          <p className="text-xl text-slate-600 leading-relaxed">
+            Have questions about our courses or need support? We're here to help you on your trading journey.
+          </p>
+        </motion.div>
 
         {/* Premium Contact Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
@@ -55,22 +59,26 @@ export default function ContactUs() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`relative h-full rounded-2xl p-8 border border-white/20 backdrop-blur-xl shadow-[0_8px_32px_rgba(31,41,55,0.1)] hover:shadow-[0_8px_32px_rgba(37,99,235,0.2)] transition-all duration-300 group overflow-hidden`}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className={`relative h-full rounded-3xl p-8 border border-white/40 backdrop-blur-2xl shadow-[0_8px_32px_rgba(31,41,55,0.1)] hover:shadow-[0_20px_48px_rgba(37,99,235,0.2)] transition-all duration-300 group overflow-hidden`}
               >
                 {/* Gradient Background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-50 group-hover:opacity-75 transition-opacity duration-300`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-40 group-hover:opacity-60 transition-opacity duration-300`} />
 
-                {/* Animated Border Gradient */}
-                <div className="absolute inset-0 border border-transparent rounded-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Animated Border Glow */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-4 border border-white/20 group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300 shadow-lg">
-                    <Icon className="w-7 h-7 text-primary group-hover:scale-110 transition-transform duration-300" />
-                  </div>
-                  <h3 className="text-lg font-bold text-text mb-3 group-hover:text-primary transition-colors">{card.title}</h3>
-                  <p className="text-subtext text-sm leading-relaxed group-hover:text-text transition-colors">
+                  <motion.div 
+                    whileHover={{ rotate: 12, scale: 1.2 }}
+                    className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-md flex items-center justify-center mb-6 border border-white/40 group-hover:from-blue-500/40 group-hover:to-cyan-500/20 transition-all duration-300 shadow-xl"
+                  >
+                    <Icon className="w-8 h-8 text-blue-600 group-hover:text-blue-700 transition-colors" />
+                  </motion.div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{card.title}</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed group-hover:text-slate-700 transition-colors">
                     {card.content}
                   </p>
                 </div>
@@ -93,7 +101,7 @@ export default function ContactUs() {
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="space-y-8">
 
             {/* Google Map */}
-            <div className="rounded-3xl overflow-hidden border border-black/5 shadow-lg h-[400px]">
+            <div className="rounded-3xl overflow-hidden border border-white/30 shadow-2xl shadow-blue-500/10 h-[400px] premium-card">
               <iframe
                 width="100%"
                 height="100%"

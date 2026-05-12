@@ -43,26 +43,45 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+    <div className="min-h-screen flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-b from-background via-secondary to-background">
+      {/* Animated background elements */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 -left-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+      </div>
 
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="max-w-md w-full space-y-8 bg-card p-10 rounded-3xl border border-black/5 relative z-10 shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
+        className="max-w-md w-full relative"
       >
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-text mb-2">Secure Your Seat</h2>
-          <p className="text-subtext text-sm">Join the next batch and transform your trading.</p>
-        </div>
+        {/* Glow background */}
+        <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-accent/30 rounded-3xl blur opacity-0 hover:opacity-75 transition duration-500"></div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="space-y-4">
+        <div className="relative bg-gradient-to-br from-white/95 via-primary/2 to-white/95 p-8 md:p-10 rounded-3xl border border-white/40 backdrop-blur-xl space-y-8 shadow-[0_8px_32px_rgba(31,41,55,0.12)]">
+          
+          {/* Header */}
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-center"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-text mb-2">Secure Your Seat</h2>
+            <p className="text-subtext text-sm leading-relaxed">Join the next batch and transform your trading journey with Assets Legacy FX Academy.</p>
+          </motion.div>
+
+          <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
             
             {/* Full Name */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="group"
+            >
+              <label className="block text-sm font-semibold text-text mb-2">Full Name</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <User className="h-5 w-5 text-primary" />
@@ -70,15 +89,21 @@ export default function Register() {
                 <input
                   type="text"
                   {...register("name", { required: "Full name is required" })}
-                  className="block w-full pl-10 bg-secondary border border-black/5 rounded-xl px-4 py-3 text-text placeholder-gray-400 focus:outline-none focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all shadow-inner"
-                  placeholder="Full Name"
+                  className="block w-full pl-10 bg-secondary/50 border border-black/5 rounded-xl px-4 py-3.5 text-text placeholder-subtext/50 focus:outline-none focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner group-hover:border-black/10"
+                  placeholder="John Doe"
                 />
               </div>
-              {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>}
-            </div>
+              {errors.name && <p className="mt-1.5 text-sm text-red-500 font-medium">{errors.name.message}</p>}
+            </motion.div>
 
             {/* Contact Number */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="group"
+            >
+              <label className="block text-sm font-semibold text-text mb-2">Contact Number</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Phone className="h-5 w-5 text-primary" />
@@ -89,15 +114,21 @@ export default function Register() {
                     required: "Contact number is required",
                     pattern: { value: /^[0-9]{10}$/, message: "Enter a valid 10-digit number" }
                   })}
-                  className="block w-full pl-10 bg-secondary border border-black/5 rounded-xl px-4 py-3 text-text placeholder-gray-400 focus:outline-none focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all shadow-inner"
-                  placeholder="Contact Number"
+                  className="block w-full pl-10 bg-secondary/50 border border-black/5 rounded-xl px-4 py-3.5 text-text placeholder-subtext/50 focus:outline-none focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner group-hover:border-black/10"
+                  placeholder="+971 50 123 4567"
                 />
               </div>
-              {errors.contact && <p className="mt-1 text-sm text-red-500">{errors.contact.message}</p>}
-            </div>
+              {errors.contact && <p className="mt-1.5 text-sm text-red-500 font-medium">{errors.contact.message}</p>}
+            </motion.div>
 
             {/* City */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="group"
+            >
+              <label className="block text-sm font-semibold text-text mb-2">City</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <MapPin className="h-5 w-5 text-primary" />
@@ -105,46 +136,74 @@ export default function Register() {
                 <input
                   type="text"
                   {...register("city", { required: "City is required" })}
-                  className="block w-full pl-10 bg-secondary border border-black/5 rounded-xl px-4 py-3 text-text placeholder-gray-400 focus:outline-none focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all shadow-inner"
-                  placeholder="City"
+                  className="block w-full pl-10 bg-secondary/50 border border-black/5 rounded-xl px-4 py-3.5 text-text placeholder-subtext/50 focus:outline-none focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner group-hover:border-black/10"
+                  placeholder="Dubai"
                 />
               </div>
-              {errors.city && <p className="mt-1 text-sm text-red-500">{errors.city.message}</p>}
-            </div>
+              {errors.city && <p className="mt-1.5 text-sm text-red-500 font-medium">{errors.city.message}</p>}
+            </motion.div>
 
             {/* Course Dropdown */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="group"
+            >
+              <label className="block text-sm font-semibold text-text mb-2">Select Course</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <BookOpen className="h-5 w-5 text-primary" />
                 </div>
                 <select
                   {...register("course", { required: "Please select a course" })}
-                  className="block w-full pl-10 bg-secondary border border-black/5 rounded-xl px-4 py-3 text-text focus:outline-none focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none shadow-inner"
+                  className="block w-full pl-10 bg-secondary/50 border border-black/5 rounded-xl px-4 py-3.5 text-text focus:outline-none focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none shadow-inner group-hover:border-black/10"
                 >
-                  <option value="">Select a Course</option>
+                  <option value="">Choose your course...</option>
                   <option value="Price Action Trading">Price Action Trading</option>
-                  <option value="Options Strategist">Options Strategist</option>
-                  <option value="Advanced Trading">Advanced Trading (Masterclass)</option>
+                  <option value="Options Strategist">Options Strategist Pro</option>
+                  <option value="Advanced Trading">Advanced Trading Masterclass</option>
                 </select>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </div>
               </div>
-              {errors.course && <p className="mt-1 text-sm text-red-500">{errors.course.message}</p>}
-            </div>
+              {errors.course && <p className="mt-1.5 text-sm text-red-500 font-medium">{errors.course.message}</p>}
+            </motion.div>
 
-          </div>
+          </form>
 
-          <button
-            type="submit"
+          {/* Submit Button */}
+          <motion.button
+            type="button"
+            onClick={handleSubmit(onSubmit)}
             disabled={isSubmitting}
-            className="w-full flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-md text-lg font-bold text-white bg-primary hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full py-4 px-4 rounded-xl shadow-lg hover:shadow-xl text-lg font-bold text-white bg-gradient-to-r from-primary to-blue-600 hover:from-primary hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isSubmitting ? (
-              <Loader2 className="w-6 h-6 animate-spin" />
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                <span>Registering...</span>
+              </>
             ) : (
-              'Submit Registration'
+              <>
+                <span>Submit Registration</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </>
             )}
-          </button>
-        </form>
+          </motion.button>
+
+          {/* Footer note */}
+          <p className="text-center text-xs text-subtext/70">
+            Our team will contact you within 24 hours during business days. No spam, just pure value.
+          </p>
+        </div>
       </motion.div>
     </div>
   );
